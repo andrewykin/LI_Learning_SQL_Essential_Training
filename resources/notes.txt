@@ -1,0 +1,24 @@
+# LinkedIn Learning - SQL Essentials
+
+## Composing Queries - Basic Queries
+
+### Comments
+- "--" before comment
+- /* This is a comment */
+
+## Discovering Insights in Data
+
+## Accessing Data from Multiple Tables
+
+## SQL Functions
+
+## Grouping
+
+## Nesting Queries
+
+## Stored Queries
+
+## Adding, Modifying, and Deleting Data
+
+## Project Missing Money Matters
+

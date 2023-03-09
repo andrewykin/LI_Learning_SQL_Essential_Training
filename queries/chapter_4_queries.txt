@@ -1,0 +1,109 @@
+-- CHAPTER 4 - COMPOSING QUERIES
+
+/*
+Created By: AI
+Creation Date: MM/DD/YYYY
+Description: This query displays all customers first & last names & email addresses
+*/
+
+SELECT
+	FirstName,
+	LastName,
+	Email
+	
+FROM
+	Customer
+
+-- Change column names (aliasing column names)
+
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer
+	
+-- Sort by Last Name
+
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer
+	
+ORDER BY
+	LastName
+
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer 
+	
+ORDER BY
+	LastName DESC 
+
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer
+	
+ORDER BY
+	LastName ASC
+
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer
+	
+ORDER BY
+	FirstName ASC,
+	LastName DESC
+	
+SELECT
+	FirstName AS [Customer First Name],
+	LastName AS "Customer Last Name",
+	Email AS EMAIL
+	
+FROM
+	Customer
+	
+ORDER BY
+	FirstName ASC,
+	LastName DESC
+	
+LIMIT 10
+
+-- CHAPTER QUIZ
+-- In the Execute SQL tab of DB Browser for SQLite, which track appears at the top of the Track table when sorted in descending order?
+SELECT
+	Name
+FROM
+	Track
+ORDER BY 
+	Name DESC
+--Using the Execute SQL tab, compose the SQL query that answers the following question: How many Customer LastNames start with G?
+SELECT 
+	LastName
+FROM
+	Customer
+ORDER BY 
+	LastName DESC --OR ASC 
+--In the Execute SQL tab of DB Browser for SQLite, how many tracks in the WSDA music database do not have a composer listed?
+SELECT 
+	Composer
+FROM 
+	Track
+ORDER BY 
+	Composer DESC
