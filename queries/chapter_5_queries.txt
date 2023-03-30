@@ -1,0 +1,17 @@
+/* Operator Types
+Arithmetic 
+- Add +
+- Subtract -
+- Multiply *
+- Divide /
+- Modulo %
+
+Comparison
+Equal to =
+Not equal to <>
+Greater than >
+Less than <
+Greater than or equal to >=
+Less than or equal to <=
+
+*/
