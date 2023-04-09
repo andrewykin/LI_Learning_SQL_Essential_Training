@@ -14,4 +14,249 @@ Less than <
 Greater than or equal to >=
 Less than or equal to <=
 
+Logical
+AND
+OR
+IN
+LIKE
+BETWEEN
 */
+
+/*
+How many customers purchased two songs at $0.99 each?
+- Look at Track & Invoice tables
+*/
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total = 1.98
+ORDER BY
+	InvoiceDate
+-- 111 rows 
+
+/*
+How many invoices exist between $1.98 and $5.00?
+- Look at Track & Invoice tables
+*/
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total BETWEEN 1.98 AND 5.00
+ORDER BY
+	InvoiceDate
+-- 178 rows 
+
+/*
+How many invoices exist between $1.98 and $3.96?
+- Look at Track & Invoice tables
+*/
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total IN(1.98, 3.96)
+ORDER BY
+	InvoiceDate
+-- 168 rows 
+
+-- How many invoices were billed to Brussels?
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	Invoice
+WHERE
+	BillingCity = 'Brussels'
+ORDER BY
+	InvoiceDate
+-- 7 rows 
+
+-- How many invoices were billed to Brussels, Orlando, or Paris?
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM 
+	Invoice
+WHERE
+	BillingCity IN('Brussels', 'Orlando', 'Paris')
+ORDER BY
+	InvoiceDate
+-- 28 rows 
+
+-- How many invoices were billed in cities that start with B?
+
+-- % is wildcard character 
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'B%'
+ORDER BY 
+	InvoiceDate
+-- 62 rows 
+
+-- How many invoices were billed in cities that have a B anywhere in it's name?
+
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE '%B%'
+ORDER BY 
+	InvoiceDate
+-- 83 rows 
+	
+-- How many invoices were billed on 5/22/10?
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	InvoiceDate = '2010-05-22 00:00:00'
+ORDER BY 
+	InvoiceDate
+-- 1 row 
+-- Alternatively WHERE DATE(InvoiceDate) = '2010-05-22'
+
+-- How many invoices were billed after 5/22/10 and have a total less than $3.00?
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	DATE(InvoiceDate) > '2010-05-22' AND total < 3.00
+ORDER BY 
+	InvoiceDate
+-- 124 rows  
+
+-- Get all invoices who's billing city starts with P or D.
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'P%' OR BillingCity LIKE 'D%'
+ORDER BY 
+	InvoiceDate
+-- 56 rows  
+
+-- Get all invoices that are greater than $1.98 from any cities whose name starts with P or D.
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE
+	total > 1.98 AND (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')
+ORDER BY 
+	InvoiceDate
+-- 35 rows  
+
+/*
+WSDA Music Sales Goal:
+They want as many customers as possible to spend between $7.00 and $15.00
+
+Sales Categories:
+Baseline Purchase - Between $0.99 and $1.99
+Low Purchase - Between $2.00 and $6.99
+Target Purchase - Between $7.00 and $15.00
+Top Performer - Above $15.00
+*/
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total,
+	CASE
+	WHEN total < 2.00 THEN 'Baseline Purchase'
+	WHEN total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+	WHEN total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+	ELSE 'Top Performer'
+	END AS PurchaseType
+FROM
+	Invoice
+ORDER BY
+	BillingCity
+-- 413 rows 
+
+-- Deeper analysis
+SELECT 
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total,
+	CASE
+	WHEN total < 2.00 THEN 'Baseline Purchase'
+	WHEN total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+	WHEN total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+	ELSE 'Top Performer'
+	END AS PurchaseType
+FROM
+	Invoice
+WHERE
+	PurchaseType = 'Top Performer'
+ORDER BY
+	BillingCity
+-- 12 rows 
+
+/*
+Chapter Quiz
+1. In the Execute SQL tab, how many invoices were billed to the city of Brussels?
+Answer: 7     SELECT * FROM Invoice WHERE BillingCity = 'Brussels'
+
+2. What is the correct syntax for the CASE statement?
+Answer: 
+SELECT
+	FirstName,
+	LastName,
+	Company,
+	Country,
+	CASE
+		WHEN Country = 'USA' THEN 'Local'
+		ELSE 'Global'
+	END AS Region
+FROM 
+	Customer
+ORDER BY 
+	Region
+*/
+
+
+
+
+
