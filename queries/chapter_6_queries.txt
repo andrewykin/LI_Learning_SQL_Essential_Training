@@ -1,0 +1,68 @@
+/*
+Chapter 6 - Joins
+How tables share a relationship:
+- JOIN - command that combines fields from two or more tables of a relational database 
+- ERD - Entity Relationship Diagram - graphical representation of tables
+
+Invoice & Customer tables share CustomerID columns 
+- Customer table has CustomerID as a primary key 
+- Invoice table has CustomerID as a foreign key 
+
+JOINs require tablename.columnname/fieldname syntax
+- often use aliases to reduce typing
+*/
+-- JOIN Customer & Invoice Tables
+SELECT *
+FROM Invoice
+INNER JOIN Customer
+ON Invoice.CustomerId = Customer.CustomerId
+ORDER BY Customer.CustomerId
+
+-- JOIN w/ Aliasing
+SELECT 
+	c.LastName,
+	c.FirstName,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.total
+FROM Invoice AS i
+INNER JOIN Customer AS c
+ON i.CustomerId = c.CustomerId
+ORDER BY c.CustomerId
+
+/* 
+How we've used JOIN clauses
+- Accessed fields in multiple tables
+- Identified primary keys
+- Identified similar foreign keys
+- Used ON keyword to link the tables together
+
+What if the data doesn't match?
+- discrepancies between tables are handled with different join types
+
+INNER JOIN
+- Only returns matching records, unmatched data from either table is ignored
+- Represents only the overlapping sections of Venn Diagram
+- Most commonly used, to bring corresponding data together from different tables in a relational database 
+
+LEFT OUTER JOIN
+- Combines all the records from the left table and any matching records from the right TABLE
+  - left & right depends on order listed in SQL statement
+  
+RIGHT OUTER JOIN 
+- right outer joins are not supported in SQLite, but popular so in other Relational Database Management Systems
+- Mirror image of the LEFT OUTER JOIN
+  - Returns RIGHT table & matching information from LEFT table 
+- 
+  
+  
+  
+
+*/
+
+
+
+
+
+
