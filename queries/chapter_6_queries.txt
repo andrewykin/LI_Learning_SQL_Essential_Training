@@ -54,15 +54,43 @@ RIGHT OUTER JOIN
 - right outer joins are not supported in SQLite, but popular so in other Relational Database Management Systems
 - Mirror image of the LEFT OUTER JOIN
   - Returns RIGHT table & matching information from LEFT table 
-- 
-  
-  
-  
+
 
 */
 
+-- JOINS on more than two tables | What employees are responsible for the 10 highest individual sales?
+SELECT
+	e.FirstName,
+	e.LastName,
+	e.EmployeeId,
+	c.FirstName,
+	c.LastName,
+	c.SupportRepId,
+	i.CustomerId,
+	i.total
+FROM 
+	Invoice AS i
+INNER JOIN 
+	Customer AS c
+ON
+	i.CustomerId = c.CustomerId
+INNER JOIN 
+	Employee AS e
+ON 
+	c.SupportRepId = e.EmployeeId
+ORDER BY
+	i.total DESC
+LIMIT 10
 
-
+/*
+Chapter Quiz
+1. Which statement best describes a Left Outer Join?
+	Answer: It returns all records from the left table with any matching records from the right table.
+2. Which statement best describes an Inner Join?
+	Answer: It returns only matching records from two or more tables.
+3. Using the Browse Data tab or the Entity Relationship Diagram (ERD) for the database; take a look at the tracks table. Identify which fields in this table are foreign keys of another table.
+	Answer: AlbumId, MediaTypeId, and GenreId 
+*/
 
 
 
