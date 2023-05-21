@@ -1,0 +1,99 @@
+/*
+Chapter 7 - Functions
+
+Concatenate - Linking things together in a chain or series
+
+Truncate -  To shorten or reduce a string of text 
+
+SUBSTR() Function - Used to truncate strings of text 
+
+UPPER() Function - Converts a string of text to uppercase
+LOWER() Function - Converts a string of text to all lowercase
+
+DATE Functions - Allow the manipulation of data that is stored in various date and time formats
+
+AGGREGATE() Function - Turns a range of numbers into a single point of data 
+
+Nesting Function - A function contained within another function
+*/
+
+-- Connecting Strings | Create a Mailing List of US Customers
+SELECT 
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||' '|| Address ||', '|| City ||' '|| State ||' '|| PostalCode AS [Mailing Address]
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+	
+
+-- Separating Text | Remove Zip+4 Code (4 #'s after zip code)
+SELECT 
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||' '|| Address ||', '|| City ||' '|| State ||' '|| PostalCode AS [Mailing Address],
+	LENGTH(PostalCode),
+	substr(PostalCode,1,5) AS [5 Digit Postal Code]
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+
+-- UPPER & LOWER string Functions | First Name all caps & Last Name all lower case 
+SELECT 
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||' '|| Address ||', '|| City ||' '|| State ||' '|| PostalCode AS [Mailing Address],
+	LENGTH(PostalCode),
+	substr(PostalCode,1,5) AS [5 Digit Postal Code],
+	upper(FirstName) AS [First Name All Caps],
+	lower(LastName) AS [Last Name All Lower]
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+
+-- Date Functions | calculate employee's ages using birthday field (current date vs employee's birthdate)
+SELECT
+	LastName,
+	FirstName,
+	BirthDate,
+	strftime('%Y-%m-%d',Birthdate) AS [Birthdate No Timecode],
+	strftime('%Y-%m-%d','now') - strftime('%Y-%m-%d',Birthdate) AS Age
+FROM 
+	Employee
+
+-- Aggregate Functions | What are our all time global sales (using invoice table)
+SELECT 
+	SUM(Total) AS [Total Sales],
+	AVG(Total) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+	Invoice
+	
+-- Nesting Functions | 	Round Avg 
+SELECT 
+	SUM(Total) AS [Total Sales],
+	round(AVG(Total),2) AS [Average Sales],
+	MAX(Total) AS [Maximum Sale],
+	MIN(Total) AS [Minimum Sale],
+	COUNT(*) AS [Sales Count]
+FROM
+	Invoice
+
+/*
+Chapter Quiz
+1. What operator is used to concatenate two fields?
+Answer - ||
+2. What are some valid string functions?
+Answer - UPPER(), TRIM(), LOWER()
+3. Which function returns lower case characters?
+Answer - LOWER()
+
+*/
