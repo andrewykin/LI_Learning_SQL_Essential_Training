@@ -1,0 +1,132 @@
+/*
+Chapter 9 - Nesting Queries
+
+Nested Query - a query wrapped inside of another query 
+
+
+
+*/
+
+-- SELECT clause subquery | Gather data about all invoices that are less than thish average?
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	total
+FROM
+	Invoice
+WHERE 
+	total <
+		(select avg(total) from Invoice)
+ORDER BY
+	total DESC 
+-- invoice total average is $8.06
+-- the portion inside the parentheses is called the Inner Query, the rest is Outer Query 
+
+-- Aggregated subqueries | How is each individual city performing against the global average sales?
+SELECT
+	BillingCity,
+	round(avg(total),2) AS [City Average],
+	(select round(avg(total),2) from Invoice) AS [Global Average]
+FROM
+	Invoice
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity
+	
+-- Subqueries without Agregate functions | 
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	Invoice
+WHERE
+	InvoiceDate >
+		(SELECT
+		  InvoiceDate
+		 FROM
+		  Invoice
+		 WHERE
+		  InvoiceId = 251)
+
+-- IN clause subquery | 
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity
+FROM
+	Invoice
+WHERE
+	InvoiceDate IN 
+(SELECT
+	InvoiceDate
+FROM
+	Invoice
+WHERE
+	InvoiceId IN (251, 252, 254))
+
+-- DISTINCT clause subquery | Which tracks are not selling?
+SELECT
+	TrackId,
+	Composer,
+	Name
+FROM
+	Track
+WHERE
+	TrackId
+NOT IN
+(SELECT
+	DISTINCT
+	TrackId
+FROM
+	InvoiceLine
+ORDER BY
+	TrackId)
+-- 1,519 tracks not selling
+
+/*
+Chapter Quiz
+1. What are the components of a subquery?
+Answer: Inner Query and Outer Query 
+2. What is a subquery?
+Answer: one query nested inside of another
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
