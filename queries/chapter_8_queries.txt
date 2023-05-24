@@ -1,0 +1,119 @@
+/*
+Chapter 8 - Grouping
+
+WHERE clause is for filtering non-aggregate data 
+
+HAVING clause is for filtering results w/ aggregates 
+
+*/
+
+-- Filtering w/ a grouped condition | What are the average invoice totals by city?
+SELECT
+	BillingCity,
+	avg(total)
+FROM
+	Invoice
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity
+
+-- Grouping with WHERE clause | What are the avg invoice totals by city for only the cities that start with L?
+SELECT
+	BillingCity,
+	round(avg(total),2)
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'L%'
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity
+
+-- Grouping w/ HAVING clause | What are the avg invoice totals > $5? 
+SELECT
+	BillingCity,
+	round(avg(total),2)
+FROM
+	Invoice
+GROUP BY
+	BillingCity
+HAVING 
+	avg(total)>5
+ORDER BY
+	BillingCity
+
+-- Grouping w/ WHERE and HAVING clauses | What are the avg invoice totals > $5 for cities starting w/ B?
+SELECT
+	BillingCity,
+	round(avg(total),2)
+FROM
+	Invoice
+WHERE
+	BillingCity LIKE 'B%'
+GROUP BY
+	BillingCity
+HAVING 
+	avg(total)>5
+ORDER BY
+	BillingCity
+
+-- Grouping by many fields | What are the average invoice totals by billing country and city?
+SELECT
+	BillingCity,
+	BillingCountry,
+	round(avg(total),2)
+FROM
+	Invoice
+GROUP BY
+	BillingCity, BillingCountry
+ORDER BY
+	BillingCountry
+
+/*
+Chapter Quiz
+1. Where does the HAVING clause appear?
+Answer: after the GROUP BY clause
+2. What does the GROUP BY clause do?
+Answer: allows you to group data 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
