@@ -1,0 +1,35 @@
+/*
+Chapter 10 - Stored Queries Part 2
+
+Deleting View - right click & delete view from database structure tab (SQLite)
+OR 
+DROP VIEW 
+		V_AvgTotal
+		
+execute or run statement, view will be removed
+changing views does not change tables that are referenced, just views
+
+CHAPTER QUIZ
+1. What is a view?
+A: a query that can be saved and executed repeatedly
+2. What is the correct syntax to create a view called V_Composers?
+A: CREATE VIEW V_Composers AS
+3. What is another name for a view?
+A: a virtual table 
+
+*/
+--Views & Joins | Join Invoice Line Table & Tracks Table 
+CREATE VIEW V_Tracks_InvoiceLine AS 
+SELECT 
+	il.InvoiceId,
+	il.UnitPrice,
+	il.Quantity,
+	t.Name,
+	t.Composer,
+	t.Milliseconds
+FROM
+	InvoiceLine il
+INNER JOIN
+	Track t
+ON
+	il.TrackId = t.TrackId
