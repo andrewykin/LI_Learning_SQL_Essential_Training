@@ -1,0 +1,15 @@
+/*
+Chapter 10 - Stored Queries
+
+VIEW - SQL query that is saved and can be executed repeatedly or referenced by other queries (convenient)
+*/
+
+-- Views (virtual tables) - can also see in database structure tab or browse data tab 
+CREATE VIEW V_AvgTotal AS 
+SELECT
+	round(avg(total),2) AS [Average Total]
+FROM
+	Invoice
+/*
+Editing a view in SQLite - deletes then remakes, does not really modify like it might in other programs
+*/
