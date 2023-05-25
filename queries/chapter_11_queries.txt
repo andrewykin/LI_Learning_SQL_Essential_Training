@@ -1,0 +1,47 @@
+/*
+Chapter 11 - Adding, Modifying, and Deleting Data 
+
+Data Manipulation Language (DML) - SQL statements used to alter the data stored in the tables of a database 
+
+Statements that alter data 
+- INSERT
+- UPDATE
+- DELETE - removes existing records from a table 
+	- without the WHERE clause, using the DELETE statement will delete EVERY SINGLE RECORD in your table 
+
+WHERE clause - specifies the row of data to update 
+*/
+
+-- Inserting Data | Add new Artist to Artist table 
+INSERT INTO
+	Artist (Name)
+VALUES ('Bob Marley')
+
+-- shows up in browse data artist table as ArtistId 276 (last entry)
+
+-- change Bob Marley to Damien Marley
+UPDATE 
+	Artist
+SET Name = 'Damien Marley'
+-- if you ran like this it would update every name in Artist table to Damien Marley
+WHERE 
+	ArtistId = 276
+
+-- Deleting Data | Remove Damien Marley
+DELETE FROM
+	Artist
+WHERE 
+	ArtistId = 276
+-- 275 records now
+
+/*
+Chapter Quiz
+1. What does DML stand for?
+A: Data Manipulation Language
+2. What DML command removes data?
+A: DELETE 
+3. What is the correct syntax to add the artist 'Peter Tosh' to the artist table?
+A: INSERT INTO Artist (Name) VALUES ('Peter Tosh')
+*/
+
+
