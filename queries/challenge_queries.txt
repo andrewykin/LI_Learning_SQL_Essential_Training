@@ -1,0 +1,61 @@
+/*
+Project Missing Money Matters
+
+Challenge 1 
+1. How many transactions took place between 2011 - 2012?
+	- 167 
+2. How much money did WSDA Music make between 2011 - 2012?
+	- $1,947.97
+
+Challenge 2
+1. Get a list of customers who made purchases between 2011 - 2012.
+2. Get a list of customers, sales reps, and total transaction amounts for each customer between 2011 - 2012.
+3. How many transactions are above the average transaction amount during the same time period?
+4. What is the average transaction amount for each year that WSDA Music has been in business?
+
+Challenge 3
+1. Get a list of employees who exceeded teh average transaction amount from sales they generated during 2011 and 2012.
+2. Create a Commission Payout column that displays each employee’s commission based on 15% of the sales transaction amount. 
+3. Which employee made the highest commission?
+4. List the customers that the employee identified in the last question.
+5. Which customer made the highest purchase?
+6. Look at this customer record - do you see anything suspicious?
+7. Who do you conclude is our primary person of interest?
+*/
+
+-- Challenge 1 | 1. How many transactions took place between 2011 - 2012?
+SELECT
+	InvoiceId,
+	CustomerId,
+	InvoiceDate,
+	Total
+FROM
+	Invoice
+WHERE 
+	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
+
+-- OR
+	
+SELECT 
+	COUNT(*)
+FROM 
+	Invoice
+WHERE
+	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
+
+-- Challenge 1 | 2. How much money did WSDA Music make between 2011 - 2012?
+SELECT
+	SUM(total)
+FROM 
+	Invoice
+WHERE
+	InvoiceDate >= '2011-01-01' AND InvoiceDate <= '2012-12-31'
+
+
+
+
+
+
+
+
+
