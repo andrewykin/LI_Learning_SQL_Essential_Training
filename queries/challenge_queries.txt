@@ -53,8 +53,22 @@ WHERE
 
 
 
+-- Challenge 2 | 1. Get a list of customers who made purchases between 2011 - 2012.
+SELECT
+	CustomerId,
+	Total
+FROM
+
+WHERE
 
 
+-- Challenge 2 | 2. Get a list of customers, sales reps, and total transaction amounts for each customer between 2011 - 2012.
+
+
+-- Challenge 2 | 3. How many transactions are above the average transaction amount during the same time period?
+
+
+-- Challenge 2 | 4. What is the average transaction amount for each year that WSDA Music has been in business?
 
 
 
